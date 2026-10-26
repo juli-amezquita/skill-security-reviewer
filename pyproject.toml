@@ -1,0 +1,29 @@
+[project]
+name = "skill-security-reviewer"
+version = "2.0.0"
+description = "Security review for third-party Claude skills and plugins: deterministic preflight plus a guided semantic audit."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [{ name = "Juliana Amézquita" }]
+keywords = ["claude", "agent-skills", "security", "prompt-injection", "supply-chain"]
+dependencies = []
+
+[project.urls]
+Repository = "https://github.com/juli-amezquita/skill-security-reviewer"
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "SIM", "RUF"]
+
+[tool.mypy]
+python_version = "3.10"
+strict = true
+files = ["src", "tools"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
