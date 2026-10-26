@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build ``revisor-seguridad-skills/SKILL.md`` from its templates and the preflight source.
+"""Build ``skill-security-reviewer/SKILL.md`` from its templates and the preflight source.
 
 The script in ``src/skill_preflight.py`` is the single source of truth. It is embedded
 verbatim in Annex A of SKILL.md together with its sha256, so a skill installed from a
@@ -24,9 +24,9 @@ ROOT: Path = Path(__file__).resolve().parents[1]
 SOURCE: Path = ROOT / "src" / "skill_preflight.py"
 HEAD: Path = ROOT / "templates" / "skill_head.md"
 TAIL: Path = ROOT / "templates" / "skill_tail.md"
-OUTPUT: Path = ROOT / "revisor-seguridad-skills" / "SKILL.md"
+OUTPUT: Path = ROOT / "skill-security-reviewer" / "SKILL.md"
 PLACEHOLDER: str = "__SHA256__"
-ANNEX_HEADING: str = "## Anexo A \N{EM DASH} skill_preflight.py"
+ANNEX_HEADING: str = "## Annex A \N{EM DASH} skill_preflight.py"
 MAX_DESCRIPTION: int = 1024
 
 # Claude Code runs these on skill load; built from hex escapes so this file never contains them.

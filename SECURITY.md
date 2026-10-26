@@ -11,7 +11,7 @@ This project is a **review aid, not a guarantee**. A clean report means "no rele
 
 ### Integrity of this repository
 
-- `revisor-seguridad-skills/SKILL.md` is generated. It embeds `src/skill_preflight.py` verbatim together with its sha256, and the agent verifies that hash before running the script.
+- `skill-security-reviewer/SKILL.md` is generated. It embeds `src/skill_preflight.py` verbatim together with its sha256, and the agent verifies that hash before running the script.
 - CI fails if `SKILL.md` is stale, if the embedded hash does not match, if any invisible Unicode character appears, if the frontmatter declares anything beyond `name` and `description`, or if `SKILL.md` contains commands that Claude Code would run at load time.
 - Before installing or updating, run `python3 tools/build_skill.py --check` locally.
 
@@ -26,6 +26,6 @@ Este proyecto es una **ayuda para revisar, no una garantía**. Un informe limpio
 
 ### Integridad de este repositorio
 
-- `revisor-seguridad-skills/SKILL.md` se genera automáticamente. Incluye `src/skill_preflight.py` literal junto con su sha256, y el agente verifica ese hash antes de ejecutar el script.
+- `skill-security-reviewer/SKILL.md` se genera automáticamente. Incluye `src/skill_preflight.py` literal junto con su sha256, y el agente verifica ese hash antes de ejecutar el script.
 - El CI falla si `SKILL.md` está desactualizado, si el hash no coincide, si aparece cualquier carácter Unicode invisible, si el frontmatter declara algo más que `name` y `description`, o si `SKILL.md` contiene comandos que Claude Code ejecutaría al cargar la skill.
 - Antes de instalar o actualizar, corre `python3 tools/build_skill.py --check` en tu computador.

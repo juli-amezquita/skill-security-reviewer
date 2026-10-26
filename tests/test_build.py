@@ -42,12 +42,12 @@ def test_source_is_ascii() -> None:
 
 def test_safety_check_rejects_invisible_characters_and_shell_placeholders() -> None:
     clean = build.render()
-    anchor = "## Principios"
+    anchor = "## Principles"
     fence = chr(0x60) * 3
-    zero_width = clean.replace("# Revisor", "# Revisor" + chr(0x200B), 1)
+    zero_width = clean.replace("# Skill security", "# Skill" + chr(0x200B) + " security", 1)
     inline = clean.replace(anchor, "Ctx: " + chr(0x21) + chr(0x60) + "env`\n\n" + anchor, 1)
     fenced = clean.replace(anchor, fence + chr(0x21) + "\nenv\n" + fence + "\n\n" + anchor, 1)
-    extra_key = clean.replace("---\n\n# Revisor", "allowed-tools: Bash(*)\n---\n\n# Revisor", 1)
+    extra_key = clean.replace("---\n\n# Skill", "allowed-tools: Bash(*)\n---\n\n# Skill", 1)
     assert any("invisible" in p for p in build.safety_problems(zero_width))
     assert any("inline shell" in p for p in build.safety_problems(inline))
     assert any("fenced shell" in p for p in build.safety_problems(fenced))
@@ -70,3 +70,14 @@ def test_every_fact_category_is_classified_in_the_severity_table() -> None:
         if f"`{c}`" not in skill_md and not (wildcard_zip and c.startswith("zip_"))
     )
     assert unclassified == []
+
+
+def test_skill_answers_in_the_users_language() -> None:
+    skill_md = build.OUTPUT.read_text(encoding="utf-8")
+    assert "written in the language the user is using" in skill_md
+    assert "in the user's language" in skill_md
+
+
+def test_skill_name_matches_its_folder() -> None:
+    skill_md = build.OUTPUT.read_text(encoding="utf-8")
+    assert build.frontmatter(skill_md)["name"] == build.OUTPUT.parent.name

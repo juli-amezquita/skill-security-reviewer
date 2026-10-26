@@ -51,7 +51,7 @@ git clone https://github.com/juli-amezquita/skill-security-reviewer.git
 cd skill-security-reviewer
 python3 tools/build_skill.py --check   # hash, hidden characters, load-time commands
 mkdir -p ~/.claude/skills
-cp -R revisor-seguridad-skills ~/.claude/skills/
+cp -R skill-security-reviewer ~/.claude/skills/
 ```
 
 Copy instead of symlinking: a copy pins the exact version you verified. To update, run `git pull`, the check, and the copy again.
@@ -60,11 +60,11 @@ Optional hardening: setting `"disableSkillShellExecution": true` in your Claude 
 
 **Claude apps (web, desktop)**
 
-Zip the `revisor-seguridad-skills` folder and upload it as a custom skill from your Skills settings.
+Zip the `skill-security-reviewer` folder that lives inside this repository and upload it as a custom skill from your Skills settings. Do not upload the archive from GitHub's **Code → Download ZIP** as is: it nests the skill one folder too deep and the upload is rejected ("SKILL.md file must be in the top-level folder"). Unzip it first and compress only the `skill-security-reviewer` folder.
 
 ### Usage
 
-Ask *"audit this skill"* (or *"revisa esta skill"*) and attach the `.zip` or `.skill`, point to a folder, or paste a `SKILL.md`. For packages of unknown origin, run the review in a session without connectors.
+Ask *"audit this skill"* (or *"revisa esta skill"*) and attach the `.zip` or `.skill`, point to a folder, or paste a `SKILL.md`. The skill replies in the language you write in. For packages of unknown origin, run the review in a session without connectors.
 
 The preflight also works on its own:
 
@@ -81,7 +81,7 @@ Exit codes: `0` report produced, `1` usage error, `2` blocking archive issue (no
 src/skill_preflight.py      Source of truth for the preflight (standard library only)
 templates/                  SKILL.md text before and after Annex A
 tools/build_skill.py        Builds SKILL.md, embeds the script and its sha256, runs safety checks
-revisor-seguridad-skills/   The installable skill (generated and committed)
+skill-security-reviewer/    The installable skill (generated and committed)
 tests/                      Unit tests, build checks and the attack corpus
 ```
 
@@ -96,7 +96,7 @@ python3 tools/build_skill.py           # after editing src/ or templates/
 
 Rules of the house:
 
-- Never edit `revisor-seguridad-skills/SKILL.md` by hand. Edit `src/` or `templates/` and rebuild.
+- Never edit `skill-security-reviewer/SKILL.md` by hand. Edit `src/` or `templates/` and rebuild.
 - Keep `src/` pure ASCII and write special characters with `chr()`. Some editors and AI writing tools silently turn Unicode escape sequences into the real invisible characters; the build refuses them.
 
 ### Adding an attack you learned about
@@ -109,7 +109,7 @@ Rules of the house:
 
 - **Static only.** It cannot see what a skill downloads at runtime, future updates, the code of its dependencies, or inside binaries.
 - **The semantic layer depends on the model.** Injection against the reviewer is mitigated, not solved. For high-risk packages, read the code yourself too.
-- **Language.** The skill instructions are in Spanish (the author's working language); code, docs and reports in English are on the roadmap.
+- **Language.** The instructions are in English and the skill is told to reply in the user's language. The model translates headings and verdict labels at answer time; fact categories stay in English.
 
 ### Acknowledgments
 
@@ -162,7 +162,7 @@ git clone https://github.com/juli-amezquita/skill-security-reviewer.git
 cd skill-security-reviewer
 python3 tools/build_skill.py --check   # hash, caracteres ocultos, comandos al cargar
 mkdir -p ~/.claude/skills
-cp -R revisor-seguridad-skills ~/.claude/skills/
+cp -R skill-security-reviewer ~/.claude/skills/
 ```
 
 Copia la carpeta en vez de crear un enlace simbólico: así queda fija exactamente la versión que verificaste. Para actualizar, repite `git pull`, la verificación y la copia.
@@ -171,11 +171,11 @@ Protección adicional opcional: con `"disableSkillShellExecution": true` en la c
 
 **Apps de Claude (web y escritorio)**
 
-Comprime la carpeta `revisor-seguridad-skills` en un zip y súbela como skill personalizada desde la configuración de Skills.
+Comprime en un zip la carpeta `skill-security-reviewer` que está dentro de este repositorio y súbela como skill personalizada desde la configuración de Skills. No subas tal cual el archivo de **Code → Download ZIP** de GitHub: deja la skill una carpeta más adentro de lo permitido y la carga falla ("SKILL.md file must be in the top-level folder"). Descomprímelo primero y comprime solo la carpeta `skill-security-reviewer`.
 
 ### Uso
 
-Pide *"revisa esta skill"* (o *"audit this skill"*) y adjunta el `.zip` o `.skill`, indica una carpeta o pega un `SKILL.md`. Para paquetes de origen desconocido, haz la revisión en una sesión sin conectores.
+Pide *"revisa esta skill"* (o *"audit this skill"*) y adjunta el `.zip` o `.skill`, indica una carpeta o pega un `SKILL.md`. La skill responde en el idioma en que le escribas. Para paquetes de origen desconocido, haz la revisión en una sesión sin conectores.
 
 El preflight también funciona por sí solo:
 
@@ -192,7 +192,7 @@ Códigos de salida: `0` informe generado, `1` error de uso, `2` problema bloquea
 src/skill_preflight.py      Código fuente del preflight (solo biblioteca estándar)
 templates/                  Texto del SKILL.md antes y después del Anexo A
 tools/build_skill.py        Genera el SKILL.md, incrusta el script y su sha256, y corre los controles de seguridad
-revisor-seguridad-skills/   La skill instalable (generada y versionada)
+skill-security-reviewer/    La skill instalable (generada y versionada)
 tests/                      Pruebas unitarias, controles del build y corpus de ataques
 ```
 
@@ -207,7 +207,7 @@ python3 tools/build_skill.py           # después de editar src/ o templates/
 
 Reglas de la casa:
 
-- Nunca edites `revisor-seguridad-skills/SKILL.md` a mano. Edita `src/` o `templates/` y vuelve a generar.
+- Nunca edites `skill-security-reviewer/SKILL.md` a mano. Edita `src/` o `templates/` y vuelve a generar.
 - Mantén `src/` en ASCII puro y escribe los caracteres especiales con `chr()`. Algunos editores y herramientas de escritura con IA convierten en silencio las secuencias de escape Unicode en los caracteres invisibles reales; el build los rechaza.
 
 ### Agregar un ataque que aprendiste
@@ -220,7 +220,7 @@ Reglas de la casa:
 
 - **Solo análisis estático.** No ve lo que una skill descarga en tiempo de ejecución, sus actualizaciones futuras, el código de sus dependencias ni el interior de binarios.
 - **La capa semántica depende del modelo.** La inyección contra el revisor está mitigada, no resuelta. Para paquetes de alto riesgo, lee el código tú también.
-- **Idioma.** Las instrucciones de la skill están en español; una versión en inglés está en el roadmap.
+- **Idioma.** Las instrucciones están en inglés y la skill tiene la orden de responder en el idioma del usuario. El modelo traduce los títulos y las etiquetas de veredicto al responder; las categorías de hechos quedan en inglés.
 
 ### Agradecimientos
 
