@@ -81,3 +81,19 @@ def test_skill_answers_in_the_users_language() -> None:
 def test_skill_name_matches_its_folder() -> None:
     skill_md = build.OUTPUT.read_text(encoding="utf-8")
     assert build.frontmatter(skill_md)["name"] == build.OUTPUT.parent.name
+
+
+def test_verdict_criteria_form_a_strict_ladder() -> None:
+    skill_md = build.OUTPUT.read_text(encoding="utf-8")
+    section = skill_md.split("**Overall verdict", 1)[1].split("## Step 7", 1)[0]
+    criteria = [row.split("|")[2].strip() for row in section.splitlines() if row.startswith("| **")]
+    expected = ["At least one CRITICAL", "At least one HIGH", "At least one MEDIUM", "Only LOW"]
+    assert len(criteria) == len(expected)
+    assert all(c.startswith(p) for c, p in zip(criteria, expected, strict=True))
+    assert "first row that matches" in section
+
+
+def test_hex_escapes_in_preflight_are_explained() -> None:
+    source = build.SOURCE.read_text(encoding="utf-8")
+    comments = [line for line in source.splitlines() if line.lstrip().startswith("#")]
+    assert any("\\x21" in line and "\\x60" in line for line in comments)

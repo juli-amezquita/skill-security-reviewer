@@ -125,14 +125,14 @@ Several minor signals pointing the same way (reading data, encoding it and sendi
 | `undecodable`, `special_file`, `zip_comment` | MEDIUM; HIGH if it is compiled code without source (e.g. `.pyc`) | It is a known asset (font, image) or inert text |
 | `long_line`, `large_file`, `dependency_manifest`, `active_markup`, internal `symlink`, `zip_executable_entry`, `zip_symlink_entry` | MEDIUM | Reviewed |
 
-**Overall verdict:**
+**Overall verdict.** Apply the downgrade rules above first, then take the first row that matches, from top to bottom:
 
 | Verdict | Criterion |
 |---|---|
 | **REJECT** | At least one CRITICAL finding |
-| **DO NOT INSTALL WITHOUT CHANGES** | HIGH findings without a clear justification |
-| **INSTALL WITH PRECAUTIONS** | Only MEDIUM or LOW findings, and the user understands them |
-| **NO RELEVANT FINDINGS** | Nothing HIGH or above and consistent behavior. **This does not mean "safe"**: it always comes with the residual risk |
+| **DO NOT INSTALL WITHOUT CHANGES** | At least one HIGH finding, and no CRITICAL |
+| **INSTALL WITH PRECAUTIONS** | At least one MEDIUM finding, and nothing HIGH or above; the user must understand each one before installing |
+| **NO RELEVANT FINDINGS** | Only LOW findings or none, and behavior consistent with the description. **This does not mean "safe"**: it always comes with the residual risk |
 
 ## Step 7 — Report
 
@@ -187,7 +187,7 @@ Deliver it in the chat, in the user's language (see **Language** above). Offer i
 
 ## Annex A — skill_preflight.py
 
-Expected sha256 of the extracted script: `e4ad60b853e6dd1dab69e7a8e8d60500d6d37a831f3f2131cdee8465bcaf4d1c`
+Expected sha256 of the extracted script: `9097bc451528687d68207d8a97dddd39156c05f0c7190adc25187a3fc861ebe8`
 
 Python 3.10 or later, standard library only. Reports facts, not verdicts.
 
@@ -327,6 +327,9 @@ SCRIPT_PREFIXES: tuple[str, ...] = (
     "MATHEMATICAL",
 )
 
+# "!" and the backtick are written as \x21 and \x60 on purpose: Claude Code runs an
+# exclamation mark followed by a backtick-quoted command as a shell command when a skill
+# loads, and this file is embedded verbatim in SKILL.md. The escapes keep it inert.
 URL_RE = re.compile(r"https?://[^\s<>\"'\x60)\]}]+", re.IGNORECASE)
 REMOTE_IMAGE_RE = re.compile(
     r"\x21\[[^\]]*\]\(\s*<?https?://|<img\b[^>]*\bsrc\s*=\s*[\"']?https?://", re.IGNORECASE

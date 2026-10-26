@@ -133,6 +133,9 @@ SCRIPT_PREFIXES: tuple[str, ...] = (
     "MATHEMATICAL",
 )
 
+# "!" and the backtick are written as \x21 and \x60 on purpose: Claude Code runs an
+# exclamation mark followed by a backtick-quoted command as a shell command when a skill
+# loads, and this file is embedded verbatim in SKILL.md. The escapes keep it inert.
 URL_RE = re.compile(r"https?://[^\s<>\"'\x60)\]}]+", re.IGNORECASE)
 REMOTE_IMAGE_RE = re.compile(
     r"\x21\[[^\]]*\]\(\s*<?https?://|<img\b[^>]*\bsrc\s*=\s*[\"']?https?://", re.IGNORECASE
