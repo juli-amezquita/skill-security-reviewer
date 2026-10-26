@@ -14,7 +14,7 @@ Revisión de seguridad para skills y plugins de terceros de Claude, **antes** de
 
 ### The problem
 
-A skill is mostly instructions that get loaded into the model's context with near-system authority, plus optional scripts that run with the agent's permissions. Installing one from a forum or a random repository is closer to running someone else's code than to reading a document.
+A skill is mostly instructions that the model follows almost as if they were part of its own configuration, plus optional scripts that run with the agent's permissions. Installing one from a forum or a random repository is closer to running someone else's code than to reading a document.
 
 The attack surface has also moved. A malicious skill no longer needs a script: it can ask the agent to use its own connectors, memory, scheduled tasks or browser. In Claude Code it can run shell commands at load time through `allowed-tools`, `hooks` or embedded commands, without a permission prompt.
 
@@ -39,8 +39,8 @@ Design decisions:
 
 A small, reproducible test, not a benchmark:
 
-- **Decoy skill.** On the original 15-technique decoy, the regex scanner of the original community skill flagged none of the planted techniques (it only caught an obvious `curl | bash` control case). This preflight surfaces 9 of those 15 plus the frontmatter tool pre-approval. The corpus in `tests/test_decoy.py` has since grown to 17 techniques: 11 surfaced by the preflight and 6 left to the guided reading.
-- **Noise.** On the original skill's own package: 84 alerts (36 CRITICAL) from its scanner versus 4 facts from this preflight, each pointing to a documented example. Across 40 benign skills: median of 1 fact per skill, and 14 with none.
+- **Decoy skill.** On the original 15-technique decoy, the regex scanner of the course exercise this project started from (a teaching example, never meant as a production tool) flagged none of the planted techniques (it only caught an obvious `curl | bash` control case). This preflight surfaces 9 of those 15 plus the frontmatter tool pre-approval. The corpus in `tests/test_decoy.py` has since grown to 17 techniques: 11 surfaced by the preflight and 6 left to the guided reading.
+- **Noise.** On the course exercise's own package: 84 alerts (36 CRITICAL) from its scanner versus 4 facts from this preflight, each pointing to a documented example. Across 40 benign skills: median of 1 fact per skill, and 14 with none.
 
 ### Install
 
@@ -113,7 +113,7 @@ Rules of the house:
 
 ### Acknowledgments
 
-This project started as a rewrite of a community skill called `revisor-seguridad-skills` (author unknown) that was shared with me. Its workflow and severity scale inspired this version.
+This project started from a hands-on exercise in Santiago Hernández's Claude course on Udemy: a security-review skill designed for learning. I studied it, stress-tested it and rewrote it from scratch with a different architecture (deterministic preflight plus guided semantic review). The four-level severity scale and the structured audit report come from that exercise.
 
 ### License
 
@@ -125,7 +125,7 @@ This project started as a rewrite of a community skill called `revisor-seguridad
 
 ### El problema
 
-Una skill es, sobre todo, un conjunto de instrucciones que se cargan en el contexto del modelo con autoridad casi de sistema, más scripts opcionales que corren con los permisos del agente. Instalar una desde un foro o un repositorio cualquiera se parece más a ejecutar código ajeno que a leer un documento.
+Una skill es, sobre todo, un conjunto de instrucciones que el modelo sigue casi como si fueran parte de su propia configuración, más scripts opcionales que corren con los permisos del agente. Instalar una desde un foro o un repositorio cualquiera se parece más a ejecutar código ajeno que a leer un documento.
 
 Además, la superficie de ataque cambió. Una skill maliciosa ya no necesita un script: le basta con pedirle al agente que use sus propios conectores, su memoria, tareas programadas o el navegador. En Claude Code puede ejecutar comandos de shell al cargarse mediante `allowed-tools`, `hooks` o comandos embebidos, sin pedir permiso.
 
@@ -150,8 +150,8 @@ Decisiones de diseño:
 
 Una prueba pequeña y reproducible, no un benchmark:
 
-- **Skill trampa.** Con las 15 técnicas originales, el escáner de expresiones regulares de la skill comunitaria original no detectó ninguna (solo un caso de control obvio con `curl | bash`). Este preflight deja expuestas 9 de esas 15, más la pre-aprobación de herramientas en el frontmatter. El corpus de `tests/test_decoy.py` ya va en 17 técnicas: 11 las expone el preflight y 6 quedan para la lectura guiada.
-- **Ruido.** Sobre el paquete de la skill original: 84 alertas (36 CRÍTICAS) de su escáner, contra 4 hechos de este preflight, cada uno apuntando a un ejemplo documentado. Sobre 40 skills normales: mediana de 1 hecho por skill, y 14 sin ninguno.
+- **Skill trampa.** Con las 15 técnicas originales, el escáner de expresiones regulares del ejercicio del curso del que partió este proyecto (un ejemplo didáctico, que nunca pretendió ser una herramienta de producción) no detectó ninguna (solo un caso de control obvio con `curl | bash`). Este preflight deja expuestas 9 de esas 15, más la pre-aprobación de herramientas en el frontmatter. El corpus de `tests/test_decoy.py` ya va en 17 técnicas: 11 las expone el preflight y 6 quedan para la lectura guiada.
+- **Ruido.** Sobre el paquete del ejercicio del curso: 84 alertas (36 CRÍTICAS) de su escáner, contra 4 hechos de este preflight, cada uno apuntando a un ejemplo documentado. Sobre 40 skills normales: mediana de 1 hecho por skill, y 14 sin ninguno.
 
 ### Instalación
 
@@ -224,7 +224,7 @@ Reglas de la casa:
 
 ### Agradecimientos
 
-Este proyecto nació como una reescritura de una skill comunitaria llamada `revisor-seguridad-skills` (autor desconocido) que me compartieron. Su flujo de trabajo y su escala de severidad inspiraron esta versión.
+Este proyecto partió de un ejercicio práctico del curso de Claude de Santiago Hernández en Udemy: una skill de revisión de seguridad pensada para aprender. La estudié, la puse a prueba y la reescribí desde cero con otra arquitectura (preflight determinista más revisión semántica guiada). De ese ejercicio vienen la escala de severidad de cuatro niveles y el informe estructurado.
 
 ### Licencia
 
