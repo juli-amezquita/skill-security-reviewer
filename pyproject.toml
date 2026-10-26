@@ -1,6 +1,6 @@
 [project]
 name = "skill-security-reviewer"
-version = "2.0.0"
+version = "1.0.0"
 description = "Security review for third-party Claude skills and plugins: deterministic preflight plus a guided semantic audit."
 readme = "README.md"
 requires-python = ">=3.10"

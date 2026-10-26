@@ -3,7 +3,7 @@ name: revisor-seguridad-skills
 description: Audita skills y plugins de terceros (SKILL.md, .skill, .zip, carpeta o repositorio) antes de instalarlos. Detecta inyección de prompts (incluida la dirigida al propio revisor), uso indebido de las herramientas del agente, ejecución al cargar en Claude Code (allowed-tools, hooks, comandos embebidos), exfiltración, acceso a credenciales, persistencia, ofuscación y Unicode oculto. Úsala cuando pidan revisar, auditar o saber si es segura una skill o plugin ajeno, por ejemplo revisa esta skill, es segura esta skill, audit this skill o is this plugin safe. No es para revisión de código general.
 ---
 
-# Revisor de seguridad de skills (v2)
+# Revisor de seguridad de skills
 
 Audita una skill o plugin de terceros **antes** de instalarlo y entrega la evidencia para que el usuario decida. Combina dos capas:
 

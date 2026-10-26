@@ -39,8 +39,8 @@ Design decisions:
 
 A small, reproducible test, not a benchmark:
 
-- **Decoy skill.** On the original 15-technique decoy, the v1 regex scanner flagged none of the planted techniques (it only caught an obvious `curl | bash` control case). The v2 preflight surfaces 9 of those 15 plus the frontmatter tool pre-approval. The corpus in `tests/test_decoy.py` has since grown to 17 techniques: 11 surfaced by the preflight and 6 left to the guided reading.
-- **Noise.** On the v1 package itself: 84 alerts (36 CRITICAL) from the v1 scanner versus 4 facts from the preflight, each pointing to a documented example. Across 40 benign skills: median of 1 fact per skill, and 14 with none.
+- **Decoy skill.** On the original 15-technique decoy, the regex scanner of the original community skill flagged none of the planted techniques (it only caught an obvious `curl | bash` control case). This preflight surfaces 9 of those 15 plus the frontmatter tool pre-approval. The corpus in `tests/test_decoy.py` has since grown to 17 techniques: 11 surfaced by the preflight and 6 left to the guided reading.
+- **Noise.** On the original skill's own package: 84 alerts (36 CRITICAL) from its scanner versus 4 facts from this preflight, each pointing to a documented example. Across 40 benign skills: median of 1 fact per skill, and 14 with none.
 
 ### Install
 
@@ -113,7 +113,7 @@ Rules of the house:
 
 ### Acknowledgments
 
-v2 is a rewrite of a community skill called `revisor-seguridad-skills` (author unknown) that was shared with me. Its workflow and severity scale inspired this version.
+This project started as a rewrite of a community skill called `revisor-seguridad-skills` (author unknown) that was shared with me. Its workflow and severity scale inspired this version.
 
 ### License
 
@@ -150,8 +150,8 @@ Decisiones de diseño:
 
 Una prueba pequeña y reproducible, no un benchmark:
 
-- **Skill trampa.** Con las 15 técnicas originales, el escáner de expresiones regulares de la v1 no detectó ninguna (solo un caso de control obvio con `curl | bash`). El preflight de la v2 deja expuestas 9 de esas 15, más la pre-aprobación de herramientas en el frontmatter. El corpus de `tests/test_decoy.py` ya va en 17 técnicas: 11 las expone el preflight y 6 quedan para la lectura guiada.
-- **Ruido.** Sobre el propio paquete v1: 84 alertas (36 CRÍTICAS) del escáner v1, contra 4 hechos del preflight, cada uno apuntando a un ejemplo documentado. Sobre 40 skills normales: mediana de 1 hecho por skill, y 14 sin ninguno.
+- **Skill trampa.** Con las 15 técnicas originales, el escáner de expresiones regulares de la skill comunitaria original no detectó ninguna (solo un caso de control obvio con `curl | bash`). Este preflight deja expuestas 9 de esas 15, más la pre-aprobación de herramientas en el frontmatter. El corpus de `tests/test_decoy.py` ya va en 17 técnicas: 11 las expone el preflight y 6 quedan para la lectura guiada.
+- **Ruido.** Sobre el paquete de la skill original: 84 alertas (36 CRÍTICAS) de su escáner, contra 4 hechos de este preflight, cada uno apuntando a un ejemplo documentado. Sobre 40 skills normales: mediana de 1 hecho por skill, y 14 sin ninguno.
 
 ### Instalación
 
@@ -224,7 +224,7 @@ Reglas de la casa:
 
 ### Agradecimientos
 
-La v2 es una reescritura de una skill comunitaria llamada `revisor-seguridad-skills` (autor desconocido) que me compartieron. Su flujo de trabajo y su escala de severidad inspiraron esta versión.
+Este proyecto nació como una reescritura de una skill comunitaria llamada `revisor-seguridad-skills` (autor desconocido) que me compartieron. Su flujo de trabajo y su escala de severidad inspiraron esta versión.
 
 ### Licencia
 
